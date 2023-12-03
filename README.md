@@ -1,1 +1,13 @@
 # OSDA_hw
+
+## Sternberg Dataset
+For the Sternberg dataset EEG-data recorded for the study of the relationship between working memory load and motivation was taken. I took the power of the signal in the theta-frequency band (4-8 Hz) from 64 EEG channels that covered the entire head. The features in the dataset are the power of the signal in each time point of the recording, the target was the number of elements to remember (3 – low working memory load, 15 – high working memory load). The target values were transformed to 0 (3 elements) and 1 (15 elements). The idea was to predict the working memory load based on the EEG-signal. The number of observations in each class was approximately equal.
+To binarize the data I have split the dataset into train (70%) and test subsets, scaled it by the standard scaler and divided the resulting signals into 4 bins by the quartile. So, each observation was converted to a number in range of 4, reflecting the number of quartile the signal at this moment belonged to. Further, I used one-hot encoding to transform the data from the 4- to 2-valued context. Additionally, I have dropped the first column of each one-hot-encoded category to avoid milticollinearity.
+Next, I fitted 4 baseline models, using 4 cross-validation iterations and grid-search to find the optimal parameters.
+
+## SC_data dataset
+For this data I used magnetoencephalography (MEG) recording from the study where people had to read sentences from the screen. I used time periods, when the participants perceived presented words (target value 1) or saw a blank screen (target value 0). I have picked only those channels that record the signal from the occipital cortex (where the primary visual area is located). The idea was to predict the perceived visual information (word or blank space) based on the MEG recording from the occipital cortex. The features were the signals recorded from the particular channels in the prior selected time-window. The number of observations in each class was approximately equal.
+To binarize the data I have split the dataset into train (70%) and test subsets, scaled it by the standard scaler and divided the resulting signals into 5 bins by the quartile. So, each observation was converted to a number in range of 5, reflecting the number of quartiles the signal at this moment belonged to. Further, I used one-hot encoding to transform the data from the 4- to 2-valued context. Additionally, I have dropped the first column of each one-hot-encoded category to avoid milticollinearity.
+Next, I fitted 4 baseline models, using 4 cross-validation iterations and grid-search to find the optimal parameters.
+
+
